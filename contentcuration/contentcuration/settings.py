@@ -32,6 +32,7 @@ DB_ROOT = "databases"
 STATIC_ROOT = os.getenv("STATICFILES_DIR") or os.path.join(BASE_DIR, "contentcuration", "static")
 CSV_ROOT = "csvs"
 EXPORT_ROOT = "exports"
+JSON_ROOT = "jsons"
 
 BETA_MODE = os.getenv("STUDIO_BETA_MODE")
 RUNNING_TESTS = (sys.argv[1:2] == ['test'] or os.path.basename(sys.argv[0]) == 'pytest')
