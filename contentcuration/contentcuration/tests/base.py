@@ -48,11 +48,6 @@ class StudioTestCase(TestCase, BucketTestMixin):
         call_command('loadconstants')
         cls.admin_user = User.objects.create_superuser('big_shot', 'bigshot@reallybigcompany.com', 'password')
 
-    @classmethod
-    def tearDownClass(cls):
-        super(StudioTestCase, cls).tearDownClass()  # https://stackoverflow.com/questions/45212458/django-tests-failing-to-install-a-fixture-after-adding-one-more-testcase
-        # pass  # Based on comments here: https://groups.google.com/forum/#!topic/django-users/MDRcg4Fur98
-
     def setUp(self):
         if not self.persist_bucket:
             self.create_bucket()
