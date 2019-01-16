@@ -9,7 +9,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('contentcuration', '0001_squashed_0094_auto_20180910_2342'),
+        ('contentcuration', '0096_merge_20181222_0008'),
     ]
 
     operations = [
