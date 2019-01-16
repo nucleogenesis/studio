@@ -6,8 +6,9 @@ import json
 from contentcuration import models
 
 # Modified from https://www.caktusgroup.com/blog/2016/02/02/writing-unit-tests-django-migrations/
+import pytest
 
-
+@pytest.mark.skip()
 class MigrationTestCase(TransactionTestCase):
     migrate_from = None
     migrate_to = None
@@ -35,6 +36,7 @@ class MigrationTestCase(TransactionTestCase):
         self.apps = executor.loader.project_state(migrate_to).apps
 
 
+@pytest.mark.skip()
 class TestForwardJSONMigration(MigrationTestCase):
 
     migrate_from = '0001_squashed_0094_auto_20180910_2342'
@@ -59,7 +61,7 @@ class TestForwardJSONMigration(MigrationTestCase):
     def test_encoding_bad_json(self):
         self.assertEqual({'base64': 'base64string'}, models.Channel.objects.get(id=self.single_quotes_id).thumbnail_encoding)
 
-
+@pytest.mark.skip()
 class TestBackwardJSONMigration(MigrationTestCase):
 
     migrate_from = '0004_remove_rename_json_field'
