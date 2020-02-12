@@ -59,6 +59,23 @@ module.exports = (env = {}) => {
       sourceMap: dev,
     },
   };
+  const cssInsertionLoader = hot ? 'style-loader' : MiniCssExtractPlugin.loader;
+
+  const cssLoader = {
+    loader: 'css-loader',
+    options: { minimize: !dev, sourceMap: dev },
+  };
+
+  // for scss blocks
+  const sassLoaders = [
+    cssInsertionLoader,
+    cssLoader,
+    postCSSLoader,
+    {
+      loader: 'sass-loader',
+    },
+  ];
+
   return {
     context: bundleEntryDir,
     entry: {
@@ -114,6 +131,13 @@ module.exports = (env = {}) => {
     module: {
       rules: [
         {
+          test: /\.(html|vue)$/,
+          enforce: 'pre',
+          // handles <mat-svg/>, <ion-svg/>, <iconic-svg/>, and <file-svg/> svg inlining
+          loader: 'svg-icon-inline-loader',
+          exclude: /node_modules\/(?!(kolibri-components)\/).*/,
+        },
+        {
           test: /\.js?$/,
           exclude: /node_modules?/,
           use: jsLoaders,
@@ -138,6 +162,10 @@ module.exports = (env = {}) => {
         {
           test: /\.css?$/,
           use: [hot ? `style-loader` : MiniCssExtractPlugin.loader, `css-loader`, postCSSLoader],
+        },
+        {
+          test: /\.s[a|c]ss$/,
+          use: sassLoaders,
         },
         {
           test: /\.vue?$/,
