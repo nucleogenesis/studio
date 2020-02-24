@@ -53,6 +53,7 @@
         </keep-alive>
       </VContainer>
     </VContent>
+    <GlobalSnackbar />
   </VApp>
 
 </template>
@@ -64,12 +65,14 @@
   import { ListTypes, RouterNames, ChannelInvitationMapping } from '../constants';
   import ChannelInvitation from './Channel/ChannelInvitation';
   import AppBar from 'shared/views/AppBar';
+  import GlobalSnackbar from 'shared/views/GlobalSnackbar';
 
   export default {
     name: 'ChannelListIndex',
     components: {
       AppBar,
       ChannelInvitation,
+      GlobalSnackbar,
     },
     computed: {
       ...mapState({
