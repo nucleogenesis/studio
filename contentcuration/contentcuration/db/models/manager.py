@@ -569,9 +569,9 @@ class CustomContentNodeTreeManager(TreeManager.from_queryset(CustomTreeQuerySet)
 
         target_id = None
         # If the position is *-child then target should be fine as-is
-        # but if it is not - then our target is a non-Topic node
-        # and we need to be sure to pass it's parent as the target
-        # to _recurse_to_create_tree() below.
+        # but if it is not - then our position is relative to the target
+        # with the same parent as the target - but the target is not the parent
+        # and we need to get the correct parent to _recurse_to_create_tree() below.
         if target:
             if position in ["last-child", "first-child"]:
                 target_id = target.id
