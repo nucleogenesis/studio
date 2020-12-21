@@ -567,9 +567,20 @@ class CustomContentNodeTreeManager(TreeManager.from_queryset(CustomTreeQuerySet)
 
         source_copy_id_map = {}
 
+        target_id = None
+        # If the position is *-child then target should be fine as-is
+        # but if it is not - then our target is a non-Topic node
+        # and we need to be sure to pass it's parent as the target
+        # to _recurse_to_create_tree() below.
+        if target:
+            if position in ["last-child", "first-child"]:
+                target_id = target.id
+            else:
+                target_id = node.parent_id
+
         data = self._recurse_to_create_tree(
             node,
-            target.id if target else None,
+            target_id,
             source_channel_id,
             nodes_by_parent,
             source_copy_id_map,
